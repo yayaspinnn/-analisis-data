@@ -27,7 +27,7 @@ st.write('''
 workingday_trend = day_df.groupby('workingday')['count'].mean()
 workingday_labels = ['Hari Libur', 'Hari Kerja']
 fig_workingday = plt.figure(figsize=(12, 6))
-plt.bar(x=workingday_trend.index, y=workingday_trend.values, color=['orange', 'blue'])
+plt.bar(x=workingday_trend.index, height=workingday_trend.values, color=['orange', 'blue'])
 plt.xlabel('Working Day')
 plt.ylabel('Rata-rata jumlah pengguna')
 plt.title('Rata- Rata Peminjaman Sepeda di Hari Kerja atau akhir pekan')
@@ -41,7 +41,7 @@ st.write('''
 holiday_trend = day_df.groupby('holiday')['count'].mean()
 holiday_labels = ['Bukan Libur', 'Libur']
 fig_season = plt.figure(figsize=(12, 6))
-plt.bar(x=holiday_trend.index, y=holiday_trend.values, color=['orange', 'blue'])
+plt.bar(x=holiday_trend.index, height=holiday_trend.values, color=['orange', 'blue'])
 plt.xlabel('Holiday')
 plt.ylabel('Rata-rata jumlah pengguna')
 plt.title('Rata- Rata Peminjaman Sepeda di Hari libur dan bukan hari libur')
