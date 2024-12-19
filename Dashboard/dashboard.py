@@ -3,14 +3,16 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
 
-sns.set(style='dark')
+sns.set(style='darkgrid')  # Gaya visualisasi
 
 # Load dataset
 day_df = pd.read_csv("https://raw.githubusercontent.com/yayaspinnn/analisis-data/main/Dashboard/day_df.csv")
 
+# Pastikan kolom `dateday` terkonversi ke format datetime jika diperlukan
+day_df['dateday'] = pd.to_datetime(day_df['dateday'], errors='coerce')
+
 # Sidebar content
 with st.sidebar:
-
     # Add titles and personal information
     st.title('Proyek Akhir: Analisis Data Peminjaman Sepeda :fire:')
     st.header('Nama: Yaspin Andika M')
@@ -28,44 +30,55 @@ with st.sidebar:
 
 # Apply filters
 filtered_df = day_df.copy()
+
+# Filter by date range
 if date_range:
     if len(date_range) == 2:
-        filtered_df = filtered_df[(filtered_df['dateday'] >= pd.to_datetime(date_range[0])) & (filtered_df['dateday'] <= pd.to_datetime(date_range[1]))]
+        start_date, end_date = pd.to_datetime(date_range)
+        filtered_df = filtered_df[(filtered_df['dateday'] >= start_date) & (filtered_df['dateday'] <= end_date)]
+
+# Filter by season
 if selected_season:
     filtered_df = filtered_df[filtered_df['season'].isin(selected_season)]
+
+# Filter by weather
 if selected_weather:
     filtered_df = filtered_df[filtered_df['weather_situation'].isin(selected_weather)]
 
 # Main dashboard title
 st.header('Proyek Akhir: Analisis Data Peminjaman Sepeda :fire:')
 
-# Section 1: Rata-rata Peminjaman Sepeda di Hari Kerja atau Akhir pekan
-st.subheader('1. Rata-rata Peminjaman Sepeda di hari kerja atau akhir pekan')
+# Section 1: Rata-rata Peminjaman Sepeda di Hari Kerja atau Akhir Pekan
+st.subheader('1. Rata-rata Peminjaman Sepeda di Hari Kerja atau Akhir Pekan')
 st.write('''
     Berdasarkan grafik di bawah ini dapat dilihat bahwa rata-rata penggunaan penyewa sepeda lebih banyak terjadi di hari kerja daripada akhir pekan.
 ''')
 workingday_trend = filtered_df.groupby('workingday')['count'].mean()
-workingday_labels = ['Hari Libur', 'Hari Kerja']
-fig_workingday = plt.figure(figsize=(12, 6))
-plt.bar(x=workingday_trend.index, height=workingday_trend.values, color=['orange', 'blue'])
-plt.xlabel('Working Day')
-plt.ylabel('Rata-rata jumlah pengguna')
-plt.title('Rata- Rata Peminjaman Sepeda di Hari Kerja atau akhir pekan')
+workingday_labels = ['Hari Libur', 'Hari Kerja'] if 0 in workingday_trend.index else []
+fig_workingday, ax = plt.subplots(figsize=(12, 6))
+ax.bar(workingday_trend.index, workingday_trend.values, color=['orange', 'blue'])
+ax.set_xticks(workingday_trend.index)
+ax.set_xticklabels(workingday_labels)
+ax.set_xlabel('Kategori Hari')
+ax.set_ylabel('Rata-rata Jumlah Pengguna')
+ax.set_title('Rata-rata Peminjaman Sepeda di Hari Kerja atau Akhir Pekan')
 st.pyplot(fig_workingday)
 
-# Section 2: Rata-rata Peminjaman Sepeda di Hari libur (holiday) dan bukan hari libur
-st.subheader('2. Rata-rata Peminjaman Sepeda di Hari libur (holiday) dan bukan hari libur')
+# Section 2: Rata-rata Peminjaman Sepeda di Hari Libur dan Bukan Hari Libur
+st.subheader('2. Rata-rata Peminjaman Sepeda di Hari Libur dan Bukan Hari Libur')
 st.write('''
-    Berdasarkan grafik di bawah ini dapat dilihat bahwa peminjaman sepeda paling banyak terjadi bukan pada hari libur
+    Berdasarkan grafik di bawah ini dapat dilihat bahwa peminjaman sepeda paling banyak terjadi bukan pada hari libur.
 ''')
 holiday_trend = filtered_df.groupby('holiday')['count'].mean()
-holiday_labels = ['Bukan Libur', 'Libur']
-fig_season = plt.figure(figsize=(12, 6))
-plt.bar(x=holiday_trend.index, height=holiday_trend.values, color=['orange', 'blue'])
-plt.xlabel('Holiday')
-plt.ylabel('Rata-rata jumlah pengguna')
-plt.title('Rata- Rata Peminjaman Sepeda di Hari libur dan bukan hari libur')
-st.pyplot(fig_season)
+holiday_labels = ['Bukan Libur', 'Libur'] if 0 in holiday_trend.index else []
+fig_holiday, ax = plt.subplots(figsize=(12, 6))
+ax.bar(holiday_trend.index, holiday_trend.values, color=['orange', 'blue'])
+ax.set_xticks(holiday_trend.index)
+ax.set_xticklabels(holiday_labels)
+ax.set_xlabel('Kategori Libur')
+ax.set_ylabel('Rata-rata Jumlah Pengguna')
+ax.set_title('Rata-rata Peminjaman Sepeda di Hari Libur dan Bukan Hari Libur')
+st.pyplot(fig_holiday)
 
 # Footer
 st.caption('Copyright © Yaspin 2024')
