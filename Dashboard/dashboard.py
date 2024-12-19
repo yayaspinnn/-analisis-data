@@ -34,7 +34,7 @@ if date_range:
 if selected_season:
     filtered_df = filtered_df[filtered_df['season'].isin(selected_season)]
 if selected_weather:
-    filtered_df = filtered_df[filtered_df['weathersit'].isin(selected_weather)]
+    filtered_df = filtered_df[filtered_df['weather_situation'].isin(selected_weather)]
 
 # Main dashboard title
 st.header('Proyek Akhir: Analisis Data Peminjaman Sepeda :fire:')
