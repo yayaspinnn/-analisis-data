@@ -27,12 +27,6 @@ with st.sidebar:
 # Apply filters
 filtered_df = day_df.copy()
 
-# Filter by date range
-if date_range:
-    if len(date_range) == 2:
-        start_date, end_date = pd.to_datetime(date_range)
-        filtered_df = filtered_df[(filtered_df['dateday'] >= start_date) & (filtered_df['dateday'] <= end_date)]
-
 # Filter by season
 if selected_season:
     filtered_df = filtered_df[filtered_df['season'].isin(selected_season)]
