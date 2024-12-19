@@ -44,7 +44,7 @@ st.write('''
     Berdasarkan grafik di bawah ini dapat dilihat bahwa rata-rata penggunaan penyewa sepeda lebih banyak terjadi di hari kerja daripada akhir pekan.
 ''')
 workingday_trend = filtered_df.groupby('workingday')['count'].mean()
-workingday_labels = ['Hari Libur', 'Hari Kerja'] if 0 in workingday_trend.index else []
+workingday_labels = ['Akhir pekan', 'Hari Kerja'] if 0 in workingday_trend.index else []
 fig_workingday, ax = plt.subplots(figsize=(12, 6))
 ax.bar(workingday_trend.index, workingday_trend.values, color=['orange', 'blue'])
 ax.set_xticks(workingday_trend.index)
