@@ -1,22 +1,20 @@
 # Dashboard ✨
 
-## Setup Environment - Anaconda
+## Setup environment
 ```
-conda create --name main-ds python=3.9
-conda activate main-ds
-pip install -r requirements.txt
-```
-
-## Setup Environment - Shell/Terminal
-```
-mkdir proyek_analisis_data
-cd proyek_analisis_data
-pipenv install
-pipenv shell
-pip install -r requirements.txt
+conda create --name analisisdata python=3.9
+conda activate analisisdata
+pip install requirements.txt
 ```
 
 ## Run steamlit app
 ```
-https://dashboardpy-yaspinan.streamlit.app/
+cd dashboard
+streamlit run dashboard.py
+```
+
+
+## Run steamlit app
+```
+https://dashboardpy-yaspinan.streamlit.app
 ```
