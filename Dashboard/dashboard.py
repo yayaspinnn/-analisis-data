@@ -49,9 +49,9 @@ fig_workingday, ax = plt.subplots(figsize=(12, 6))
 ax.bar(workingday_trend.index, workingday_trend.values, color=['orange', 'blue'])
 ax.set_xticks(workingday_trend.index)
 ax.set_xticklabels(workingday_labels)
-ax.set_xlabel('Kategori Hari')
+ax.set_xlabel('Working Day')
 ax.set_ylabel('Rata-rata Jumlah Pengguna')
-ax.set_title('Rata-rata Peminjaman Sepeda di Hari Kerja atau Akhir Pekan')
+ax.set_title('Rata-Rata Penggunaan Sepeda: Hari Kerja vs Akhir Pekan')
 st.pyplot(fig_workingday)
 
 # Section 2: Rata-rata Peminjaman Sepeda di Hari Libur dan Bukan Hari Libur
@@ -65,9 +65,9 @@ fig_holiday, ax = plt.subplots(figsize=(12, 6))
 ax.bar(holiday_trend.index, holiday_trend.values, color=['orange', 'blue'])
 ax.set_xticks(holiday_trend.index)
 ax.set_xticklabels(holiday_labels)
-ax.set_xlabel('Kategori Libur')
+ax.set_xlabel('Holiday')
 ax.set_ylabel('Rata-rata Jumlah Pengguna')
-ax.set_title('Rata-rata Peminjaman Sepeda di Hari Libur dan Bukan Hari Libur')
+ax.set_title('Rata-Rata Penggunaan Sepeda: Hari Libur vs Bukan Hari Libur')
 st.pyplot(fig_holiday)
 
 # Footer
