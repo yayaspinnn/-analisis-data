@@ -23,7 +23,7 @@ with st.sidebar:
         "Pilih Musim:", options=day_df["season"].unique(), default=day_df["season"].unique()
     )
     selected_weather = st.multiselect(
-        "Pilih Cuaca:", options=day_df["weathersit"].unique(), default=day_df["weathersit"].unique()
+        "Pilih Cuaca:", options=day_df["weather_situation"].unique(), default=day_df["weather_situation"].unique()
     )
 
 # Apply filters
