@@ -30,7 +30,7 @@ with st.sidebar:
 filtered_df = day_df.copy()
 if date_range:
     if len(date_range) == 2:
-        filtered_df = filtered_df[(filtered_df['dteday'] >= pd.to_datetime(date_range[0])) & (filtered_df['dteday'] <= pd.to_datetime(date_range[1]))]
+        filtered_df = filtered_df[(filtered_df['dateday'] >= pd.to_datetime(date_range[0])) & (filtered_df['dateday'] <= pd.to_datetime(date_range[1]))]
 if selected_season:
     filtered_df = filtered_df[filtered_df['season'].isin(selected_season)]
 if selected_weather:
