@@ -8,9 +8,6 @@ sns.set(style='darkgrid')  # Gaya visualisasi
 # Load dataset
 day_df = pd.read_csv("https://raw.githubusercontent.com/yayaspinnn/analisis-data/main/Dashboard/day_df.csv")
 
-# Pastikan kolom `dateday` terkonversi ke format datetime jika diperlukan
-day_df['dateday'] = pd.to_datetime(day_df['dateday'], errors='coerce')
-
 # Sidebar content
 with st.sidebar:
     # Add titles and personal information
@@ -20,7 +17,6 @@ with st.sidebar:
 
     # Add filters
     st.header("Filter Data")
-    date_range = st.date_input("Pilih Rentang Tanggal", [])
     selected_season = st.multiselect(
         "Pilih Musim:", options=day_df["season"].unique(), default=day_df["season"].unique()
     )
